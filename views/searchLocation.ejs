@@ -1,0 +1,108 @@
+<% include partials/header %>
+    <h1>TOTAL RESULTS : <%= Data['total_results'] %> </h1>    
+    <a href="/" class="btn btn-warning">HOME PAGE</a>
+    <% var i = 0; %>
+    <p>
+        <% Data['results'].forEach(function(result){ %>
+            <% i=i+1 %>
+            <h2>RESULT : <%=i%> </h2>
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th><a href="<%= result['annotations']['OSM']['url'] %>">MAP</a></th>
+                </tr>
+                <tr class="bg-info">
+                    <th>CALLING CODE</th>
+                    <th><%= result['annotations']['callingcode'] %></th>
+                </tr>
+            </table>
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th>CONTINENT</th>
+                    <th> <%= result['components']['continent'] %> </th>
+                </tr>
+                <tr class="bg-primary">
+                    <th>COUNTRY</th>
+                    <th> <%= result['components']['country'] %> </th>
+                </tr>
+                <tr>
+                    <th>STATE</th>
+                    <% if(result['components']['state']){ %>
+                        <th> <%= result['components']['state'] %> </th>
+                    <%} else{ %>
+                        <th>-</th>
+                    <% } %>
+                    
+                </tr>
+                <tr class="bg-success">
+                    <th>STATE CODE</th>
+                    <% if(result['components']['state_code']){ %>
+                        <th> <%= result['components']['state_code'] %> </th>
+                    <%} else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr>
+                    <th>DISTRICT</th>
+                    <% if(result['components']['state_district']){ %>
+                        <th> <%= result['components']['state_district'] %> </th>
+                    <%} else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr class="bg-warning">
+                    <th>POST CODE</th>
+                    <% if(result['components']['postcode']){ %>
+                        <th> <%= result['components']['postcode'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+            </table>
+            <% if(result['annotations'].hasOwnProperty('timezone')){ %>
+                <table class="table table-hover table-dark">
+                    <tr>
+                       <th>TIMEZONE</th>
+                    </tr>
+                    <tr class="bg-success">
+                        <th>NAME</th>
+                        <th><%= result['annotations']['timezone']['name'] %></th>
+                    </tr>
+                    <tr class="bg-primary">
+                        <th>SHORT NAME</th>
+                        <th><%= result['annotations']['timezone']['short_name'] %></th>
+                    </tr>
+                </table>
+            <% } %>          
+            <% if(result.hasOwnProperty('bounds')){ %>
+                <table class="table table-hover table-dark">
+                    <% if(result['bounds'].hasOwnProperty('northeast')){ %>
+                        <tr>
+                            <th>NORTHEAST</th>
+                        </tr>          
+                        <tr class="bg-primary">
+                            <th>LATITUDE</th>
+                            <th><%= result['bounds']['northeast']['lat'] %></th>
+                        </tr>              
+                        <tr class="bg-success">
+                            <th>LONGITUDE</th>
+                            <th><%= result['bounds']['northeast']['lng'] %></th>
+                        </tr>  
+                    <% } %>
+                    <% if(result['bounds'].hasOwnProperty('southwest')){ %>
+                        <tr>
+                            <th>SOUTHWEST</th>
+                        </tr>    
+                        <tr class="bg-warning">
+                            <th>LATITUDE</th>
+                            <th><%= result['bounds']['southwest']['lat'] %></th>
+                        </tr>      
+                        <tr class="bg-danger">
+                            <th>LONGITUDE</th>
+                            <th><%= result['bounds']['southwest']['lng'] %></th>
+                        </tr>  
+                    <% } %>
+                </table>
+            <%} %>
+        <% }) %>
+    </p>
+<% include partials/footer %>

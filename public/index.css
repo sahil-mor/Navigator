@@ -1,0 +1,20 @@
+html{
+  height: 100%;
+  width: 100%;
+}
+body{
+  background: url("https://support.prontoforms.com/hc/article_attachments/360019055511/2019-01-11-iOS-Geolocation01.png");
+  background-position: center;
+  background-size: 100% 100%;
+  margin-left: 20%;
+  font-family: cursive;
+}
+.home{
+  margin-left: 80%;
+}
+.table{
+  width: 80%;
+}
+tr,th{
+  text-align: center;
+}

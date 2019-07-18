@@ -1,0 +1,173 @@
+<% include partials/header %>
+    <h1>GET YOURSELF TRACED HERE</h1>
+    <a href="/" class="btn btn-info home">HOME PAGE</a>
+    <% if(Data['status']['message'] === "OK"){ %>
+        <p>
+            <h2><a href="<%= Data['results'][0]['annotations']['OSM']['url'] %>">GET MAP</a> </h2>
+        </p>
+        <p>
+            <h2>CALLING CODE : <%= Data["results"][0]["annotations"]["callingcode"] %> </h2>
+            <table class="table table-hover table-dark">
+                <tr class="bg-primary">
+                    <th>CALLING CODE</th>
+                    <th>CURRENCY</th>
+                    <th>CURRENCY NAME</th>
+                    <th>CURRENCY CODE</th>
+                    <th>SUB CURRENCY</th>
+                    <th>SUB CURRENCY TO CURRENCY</th>
+                </tr>
+                <tr class="bg-success">
+                    <th><%= Data['results'][0]['annotations']['callingcode'] %></th>
+                    <th><%= Data['results'][0]['annotations']['currency']['alternate_symbols'][0] %></th>
+                    <th><%= Data['results'][0]['annotations']['currency']['name'] %></th>
+                    <th><%= Data['results'][0]['annotations']['currency']['iso_code'] %></th>
+                    <th><%= Data['results'][0]['annotations']['currency']['subunit'] %></th>
+                    <th><%= Data['results'][0]['annotations']['currency']['subunit_to_unit'] %></th>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th>TIMEZONE</th>
+                </tr>
+                <tr class="bg-success">
+                    <th>NAME</th>
+                    <th><%= Data['results'][0]['annotations']['timezone']['name'] %></th>
+                </tr>
+                <tr class="bg-primary">
+                    <th>SHORT NAME</th>
+                    <th><%= Data['results'][0]['annotations']['timezone']['short_name'] %></th>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th>NORTHEAST</th>
+                </tr>
+                <tr class="bg-primary">
+                    <th>LATITUDE</th>
+                    <th><%= Data['results'][0]['bounds']['northeast']['lat'] %></th>
+                </tr>
+                <tr class="bg-success">
+                    <th>LONGITUDE</th>
+                    <th><%= Data['results'][0]['bounds']['northeast']['lng'] %></th>
+                </tr>
+                <tr>
+                    <th>SOUTHWEST</th>
+                </tr>
+                <tr class="bg-warning">
+                    <th>LATITUDE</th>
+                    <th><%= Data['results'][0]['bounds']['southwest']['lat'] %></th>
+                </tr>
+                <tr class="bg-danger">
+                    <th>LONGITUDE</th>
+                    <th><%= Data['results'][0]['bounds']['southwest']['lng'] %></th>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <h2>DETAILS : </h2>
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th>CONTINENT</th>
+                    <% if(Data['results'][0]['components']['continent']){ %>
+                        <th> <%= Data['results'][0]['components']['continent'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr class="bg-primary">
+                    <th>COUNTRY</th>
+                    <% if(Data['results'][0]['components']['country']){ %>
+                        <th> <%= Data['results'][0]['components']['country'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr>
+                    <th>STATE</th>
+                    <% if(Data['results'][0]['components']['state']){ %>
+                        <th> <%= Data['results'][0]['components']['state'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr class="bg-success">
+                    <th>STATE CODE</th>
+                    <% if(Data['results'][0]['components']['state_code']){ %>
+                        <th> <%= Data['results'][0]['components']['state_code'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr>
+                    <th>STATE DISTRICT</th>
+                    <% if(Data['results'][0]['components']['state_district']){ %>
+                        <th> <%= Data['results'][0]['components']['state_district'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr class="bg-warning">
+                    <th>TOWN</th>
+                    <% if(Data['results'][0]['components']['town']){ %>
+                        <th> <%= Data['results'][0]['components']['town'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr>
+                    <th>POST CODE</th>
+                    <% if(Data['results'][0]['components']['postcode']){ %>
+                        <th> <%= Data['results'][0]['components']['postcode'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+            </table>
+            <table class="table table-hover table-dark">
+                <h2>ROAD INFORMATION : </h2>
+                <tr class="bg-info">
+                    <th>ROAD</th>
+                    <% if(Data['results'][0]['components']['road']){ %>
+                        <th> <%= Data['results'][0]['components']['road'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr>
+                    <th>ROAD REFERENCE</th>
+                    <% if(Data['results'][0]['components']['road_reference']){ %>
+                        <th> <%= Data['results'][0]['components']['road_reference'] %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+                <tr class="bg-danger">
+                    <th>ROAD TYPE</th>
+                    <% if(Data['results'][0]['components']['road_type']){ %>
+                        <th> <%= Data['results'][0]['components']['road_type'].toUpperCase() %> </th>
+                    <% } else{ %>
+                        <th>-</th>
+                    <% } %>
+                </tr>
+            </table>
+            <table class="table table-hover table-dark">
+                <h2>GEOMETRY :</h2>
+                <tr class="bg-warning">
+                    <th>LATITUDE</th>
+                    <th> <%= Data['results'][0]['geometry']['lat'] %> </th>
+                </tr>
+                <tr class="bg-danger">
+                    <th>LONGITUDE</th>
+                    <th> <%= Data['results'][0]['geometry']['lng'] %> </th>
+                </tr>
+            </table>
+        </p>
+    <% } else{ %>
+        <h2>SORRY!!! <%= Data['status']['message'] %> </h2>
+    <% } %>
+    
+<% include partials/footer %>

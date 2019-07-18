@@ -1,0 +1,29 @@
+<% include partials/header %>
+<link rel="stylesheet" href="/home.css">
+<button id="myLocation" class="btn btn-warning">GET MY LOCATION</button>
+<form class="notfound-search" action="searchLocation" method="POST">
+    <input type="text" name="place" placeholder="Search Other Place" required>
+    <button type="button">Search</button>
+</form>
+
+<p id="demo"></p>
+
+<script>
+    var x = $("#demo");
+    $("#myLocation").click(getLocation)
+    function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    }
+
+    function showPosition(position) {
+    $("#demo").append("Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude);
+    window.location.href = "/getLocation/" + position.coords.latitude + "/" + position.coords.longitude
+}
+</script>
+
+<% include partials/footer %>
